@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="button_start">START</string>
+    <string name="button_Q1_Finland">Finland</string>
+    <string name="button_Q1_">Switzerland</string>
+    <string name="button_Q1_Poland">Poland</string>
+    <string name="button_Q1_Slovakia">Slovakia</string>
+    <string name="check_button">Check</string>
+    <string name="clear_button">Clear</string>
+    <string name="button_Q2_Canada">Canada</string>
+    <string name="button_Q2_NewZeland">New Zeland</string>
+    <string name="button_Q2_Japan">Japan</string>
+    <string name="button_Q2_NL">the Netherlands</string>
+    <string name="button_Q3_Hungary">Hungary</string>
+    <string name="button_Q3_Austria">Austria</string>
+    <string name="button_Q3_Ukraine">Ukraine</string>
+    <string name="button_Q3_Czechia">Czech Republic</string>
+    <string name="button_Q4_Suriname">Suriname</string>
+    <string name="button_Q4_Brazil">Brazil</string>
+    <string name="button_Q4_Chile">Chile</string>
+    <string name="button_Q4_Ecuador">Ecuador</string>
+</resources>

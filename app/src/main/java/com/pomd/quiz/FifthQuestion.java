@@ -19,10 +19,18 @@ boolean button3 = true;
 boolean button4 = false;
 boolean button5 = true;
 
+    public static final String EXTRA_MESSAGE = "com.pomd.quiz.MESSAGE";
+    int points;
+    String spoints;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fifth_question);
+
+        Intent intent = getIntent();
+        String getPoints = intent.getStringExtra(FourthQuestion.EXTRA_MESSAGE);
+        points = Integer.parseInt(getPoints);
 
         Switch sw1 = (Switch) findViewById(R.id.switch1);
         sw1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -102,12 +110,20 @@ boolean button5 = true;
                     button=(Button)findViewById(R.id.button8);
                     button.setVisibility(View.VISIBLE);
                     button.setEnabled(true);
+                    points = points + 5;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 else if((button1 & button2 & button3 & button4 & button5) == false){
                     TextView tv = findViewById(R.id.textView4);
                     tv.setTextColor(Color.RED);
                     tv.setText("Not correct!");
                     tv.setVisibility(View.VISIBLE);
+                    points--;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 break;
 
@@ -138,6 +154,9 @@ boolean button5 = true;
     }
     public void Arrow(View view){
         Intent intent = new Intent(FifthQuestion.this, Finish.class);
+        TextView pnt = (TextView) findViewById(R.id.textView10);
+        String message = pnt.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 }

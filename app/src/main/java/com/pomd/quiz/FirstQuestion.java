@@ -7,11 +7,14 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class FirstQuestion extends AppCompatActivity implements View.OnClickListener {
-
+    public static final String EXTRA_MESSAGE = "com.pomd.quiz.MESSAGE";
     boolean answer;
+    int points = 0;
+    String spoints;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +35,9 @@ public class FirstQuestion extends AppCompatActivity implements View.OnClickList
     }
     public void Arrow(View view){
         Intent intent = new Intent(FirstQuestion.this, SecondQuestion.class);
+        TextView pnt = (TextView) findViewById(R.id.textView10);
+        String message = pnt.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
@@ -97,12 +103,20 @@ public class FirstQuestion extends AppCompatActivity implements View.OnClickList
                     button=(Button)findViewById(R.id.button8);
                     button.setVisibility(View.VISIBLE);
                     button.setEnabled(true);
+                    points = points + 5;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 else if(answer == false){
                     TextView tv = findViewById(R.id.textView4);
                     tv.setTextColor(Color.RED);
                     tv.setText("Not correct!");
                     tv.setVisibility(View.VISIBLE);
+                    points--;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 break;
 
@@ -125,10 +139,6 @@ public class FirstQuestion extends AppCompatActivity implements View.OnClickList
 
                 break;
 
-//            case R.id.button8:
-//                Intent intent = new Intent(this, SecondQuestion.class);
-//                startActivity(intent);
-//                break;
 
         }
 

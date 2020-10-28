@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 public class SecondQuestion extends AppCompatActivity implements View.OnClickListener {
 
-
-
+    public static final String EXTRA_MESSAGE = "com.pomd.quiz.MESSAGE";
+    int points;
+    String spoints;
     boolean answer;
 
 
@@ -20,6 +21,10 @@ public class SecondQuestion extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_question);
+
+        Intent intent = getIntent();
+        String getPoints = intent.getStringExtra(FirstQuestion.EXTRA_MESSAGE);
+        points = Integer.parseInt(getPoints);
 
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
@@ -95,12 +100,20 @@ public class SecondQuestion extends AppCompatActivity implements View.OnClickLis
                     button=(Button)findViewById(R.id.button8);
                     button.setVisibility(View.VISIBLE);
                     button.setEnabled(true);
+                    points = points + 5;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 else if(answer == false){
                     TextView tv = findViewById(R.id.textView4);
                     tv.setTextColor(Color.RED);
                     tv.setText("Not correct!");
                     tv.setVisibility(View.VISIBLE);
+                    points--;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 break;
 
@@ -129,6 +142,9 @@ public class SecondQuestion extends AppCompatActivity implements View.OnClickLis
     }
     public void Arrow(View view){
         Intent intent = new Intent(SecondQuestion.this, ThirdQuestion.class);
+        TextView pnt = (TextView) findViewById(R.id.textView10);
+        String message = pnt.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 }

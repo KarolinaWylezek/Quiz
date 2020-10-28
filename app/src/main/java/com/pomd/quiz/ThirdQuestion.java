@@ -14,11 +14,18 @@ public class ThirdQuestion extends AppCompatActivity implements View.OnClickList
     boolean ans2 = false;
     boolean ans3 = false;
     boolean ans4 = true;
+    public static final String EXTRA_MESSAGE = "com.pomd.quiz.MESSAGE";
+    int points;
+    String spoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_question);
+
+        Intent intent = getIntent();
+        String getPoints = intent.getStringExtra(SecondQuestion.EXTRA_MESSAGE);
+        points = Integer.parseInt(getPoints);
 
         Button button2 = findViewById(R.id.button2);
         Button button3 = findViewById(R.id.button3);
@@ -76,12 +83,20 @@ public class ThirdQuestion extends AppCompatActivity implements View.OnClickList
                     button=(Button)findViewById(R.id.button8);
                     button.setVisibility(View.VISIBLE);
                     button.setEnabled(true);
+                    points = points + 5;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 else if((ans1 & ans2 & ans3 & ans4) == false){
                     TextView tv = findViewById(R.id.textView4);
                     tv.setTextColor(Color.RED);
                     tv.setText("Not correct!");
                     tv.setVisibility(View.VISIBLE);
+                    points--;
+                    spoints = Integer.toString(points);
+                    TextView textView = (TextView) findViewById(R.id.textView10);
+                    textView.setText(spoints);
                 }
                 break;
 
@@ -113,6 +128,9 @@ public class ThirdQuestion extends AppCompatActivity implements View.OnClickList
     }
     public void Arrow(View view){
         Intent intent = new Intent(ThirdQuestion.this, FourthQuestion.class);
+        TextView pnt = (TextView) findViewById(R.id.textView10);
+        String message = pnt.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
 
